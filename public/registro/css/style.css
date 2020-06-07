@@ -1,51 +1,89 @@
+html, body {
+    background-color: #fff;
+    /* background-color: #000; */
+    color: #636b6f;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    height: 100vh;
+    margin: 0;
+}
 
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+.tf-font-bold{
+    font-weight: bold;
+}
 
-            .full-height {
-                height: 100vh;
-            }
+.tf-font-300{
+    font-weight: 300;
+}
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+.tf-font-500{
+    font-weight: 500;
+}
 
-            .position-ref {
-                position: relative;
-            }
+.tf-font-900{
+    font-weight: 900;
+}
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+/*Colors*/
+.tf-text-blue{ color: #007bff;}
+.tf-text-indigo{ color: #6610f2;}
+.tf-text-purple{ color: #6f42c1;}
+.tf-text-pink{ color: #e83e8c;}
+.tf-text-red{ color: #dc3545;}
+.tf-text-orange{ color: #fd7e14;}
+.tf-text-yellow{ color: #ffc107;}
+.tf-text-green{ color: #28a745;}
+.tf-text-teal{ color: #20c997;}
+.tf-text-cyan{ color: #17a2b8;}
+.tf-text-white{ color: #fff;}
+.tf-text-gray{ color: #6c757d;}
+.tf-text-gray{ color: #343a40;}
+.tf-text-primary{ color: #007bff;}
+.tf-text-secondary{ color: #6c757d;}
+.tf-text-success{ color: #28a745;}
+.tf-text-info{ color: #17a2b8;}
+.tf-text-warning{ color: #ffc107;}
+.tf-text-danger{ color: #dc3545;}
+.tf-text-light{ color: #f8f9fa;}
+.tf-text-dark{ color: #343a40;}
 
-            .content {
-                text-align: center;
-            }
+/*Colors Force*/
+.tf-text-f-blue{ color: #007bff !important;} /*Force*/
+.tf-text-f-indigo{ color: #6610f2 !important;} /*Force*/
+.tf-text-f-purple{ color: #6f42c1 !important;} /*Force*/
+.tf-text-f-pink{ color: #e83e8c !important;} /*Force*/
+.tf-text-f-red{ color: #dc3545 !important;} /*Force*/
+.tf-text-f-orange{ color: #fd7e14 !important;} /*Force*/
+.tf-text-f-yellow{ color: #ffc107 !important;} /*Force*/
+.tf-text-f-green{ color: #28a745 !important;} /*Force*/
+.tf-text-f-teal{ color: #20c997 !important;} /*Force*/
+.tf-text-f-cyan{ color: #17a2b8 !important;} /*Force*/
+.tf-text-f-white{ color: #fff !important;} /*Force*/
+.tf-text-f-gray{ color: #6c757d !important;} /*Force*/
+.tf-text-f-gray{ color: #343a40 !important;} /*Force*/
+.tf-text-f-primary{ color: #007bff !important;} /*Force*/
+.tf-text-f-secondary{ color: #6c757d !important;} /*Force*/
+.tf-text-f-success{ color: #28a745 !important;} /*Force*/
+.tf-text-f-info{ color: #17a2b8 !important;} /*Force*/
+.tf-text-f-warning{ color: #ffc107 !important;} /*Force*/
+.tf-text-f-danger{ color: #dc3545 !important;} /*Force*/
+.tf-text-f-light{ color: #f8f9fa !important;} /*Force*/
+.tf-text-f-dark{ color: #343a40 !important;} /*Force*/
 
-            .title {
-                font-size: 2rem;
-            }
+/*Cursors*/
+.tf-cursor-pointer{cursor: pointer;}
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+.tf-asterisk-required{ color: #dc3545 !important; font-weight: bold !important; font-size:2rem;}
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
+form.tf-form label { font-size: 0.9rem; font-weight: 600; }
+/* https://bootstrapcreative.com/bootstrap-4-media-queries/ */
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+.dropdown-menu.show {
+    left: auto;
+    right: 0;
+    }
+    .btn.btn-secondary.dropdown-toggle{
+    margin-left: 0.5rem;
+    }
+}
