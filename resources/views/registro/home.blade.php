@@ -20,7 +20,7 @@
                 <div class="links">
                     <a href="#" class="btn btn-outline-info btn-sm">Ver locais atendidos</a>
                     <a href="#" class="btn btn-outline-info btn-sm">Cadastrar região</a>
-                    <a href="{{ route('cadastrar_missionario_form') }}" class="btn btn-outline-info btn-sm">Cadastrar missionário</a>
+                    <a href="{{ route('cadastro_de_missionario_form') }}" class="btn btn-outline-info btn-sm">Cadastrar missionário</a>
                     <a href="#" class="btn btn-outline-info btn-sm">Pedir missionários</a>
                 </div>
             </div>
