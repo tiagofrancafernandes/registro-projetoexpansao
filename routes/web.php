@@ -33,7 +33,7 @@ Route::get('/', function () {
     return view('registro.home');
 });
 
-Route::get('/cadastro_de_missionario',              'RegisterMissionaryController@create')->name('cadastro_de_missionario_form');
+Route::get('/cadastro_de_missionario',              'RegisterMissionaryController@create')->name('cadastro_de_missionario_form')->middleware('auth');
 Route::get('/cadastro_de_missionario/edit/{m_id}',  'RegisterMissionaryController@show')->name('cadastro_de_missionario_edit');
 Route::post('/cadastro_de_missionario/store',       'RegisterMissionaryController@store')->name('cadastro_de_missionario_store');
 Route::post('/cadastro_de_missionario/update',      'RegisterMissionaryController@update')->name('cadastro_de_missionario_update');
@@ -42,6 +42,9 @@ Route::post('/cadastro_de_missionario/delete',      'RegisterMissionaryControlle
 Route::get('/pt', function(){ return view('registro/pages/pt_br'); });
 Route::get('/map', function(){ return view('registro/pages/map'); })->name('page_map');
 Route::get('/search', function(){ return view('registro/pages/search'); })->name('page_search');
+// Route::get('/tmp', function(){ return view('auth/passwords/reset'); })->name('route_tmp');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/error_page/404', function(){ return view('errors/404'); })->name('error_page_404');

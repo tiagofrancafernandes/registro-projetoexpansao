@@ -18,7 +18,7 @@
 
     <!-- Styles -->    
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('') }}bootstrap-4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('') }}bootstrap-4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,600" rel="stylesheet" type="text/css">

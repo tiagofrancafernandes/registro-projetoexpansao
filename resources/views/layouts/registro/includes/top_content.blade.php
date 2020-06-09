@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-info">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="{{ url('/') }}">
         <img src="{{ asset('/') }}registro/img/registro_logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
         Registro
       </a>
@@ -12,18 +12,15 @@
                 <a class="nav-link" href="{{ route('home') }}">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('home') }}">Home</a>
+                <a class="nav-link" href="{{ route('error_page_404') }}">404</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('home') }}">Home</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ route('home') }}">Home</a>
+                <a class="nav-link" href="{{ route('cadastro_de_missionario_form') }}">Cadastro de Missionario</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar">
-            <button class="btn btn-success my-2 my-sm-0" type="submit">Pesquisar</button>
+            <input class="form-control mr-sm-2" type="search" placeholder="{{ __('Search') }}">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">{{ __('Search') }}</button>
         </form>
         <div class="dropdown form-inline my-2 my-lg-0">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,16 +35,16 @@
     
             @guest
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <a href="{{ route('login') }}" class="dropdown-item">Login</a>
-                <a href="{{ route('register') }}" class="dropdown-item">Register</a>
+                <a href="{{ route('login') }}" class="dropdown-item">{{ __('Login') }}</a>
+                <a href="{{ route('register') }}" class="dropdown-item">{{ __('Create account') }}</a>
             </div>
             @else
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <a href="{{ route('home') }}#minha_conta" class="dropdown-item">Minha conta</a>
+                <a href="{{ route('home') }}#minha_conta" class="dropdown-item">{{ __('My account') }}</a>
                 <a href="{{ route('logout') }}" class="dropdown-item"
                     onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
-                    Logout
+                    Sair
                 </a>
     
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
