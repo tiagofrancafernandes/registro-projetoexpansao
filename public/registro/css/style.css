@@ -76,6 +76,10 @@ html, body {
 .tf-asterisk-required{ color: #dc3545 !important; font-weight: bold !important; font-size:2rem;}
 
 form.tf-form label { font-size: 0.9rem; font-weight: 600; }
+
+/* TF Sticky footer styles */
+.tf-sticky-footer{  margin-top: 100vh;}
+
 /* https://bootstrapcreative.com/bootstrap-4-media-queries/ */
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) { 
