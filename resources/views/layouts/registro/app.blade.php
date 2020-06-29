@@ -36,12 +36,17 @@
     @yield('before_content')
 
     @include('layouts.registro.includes.top_content')
-
-    <div class="mt-3 pt-3"></div>
-    <div class="container mt-3 pt-3">
+    
+    @if(View::hasSection('no_top_space'))
+        @yield('no_top_space')
+        <!-- TOP force_spacing -->
+    @else
+        <div class="force_spacing"></div>
+    @endif
+    <div class="container-box mt-3 pt-3">
         @yield('content')
     </div>
-
+    <div class="force_spacing"></div>
     @include('layouts.registro/includes/footer')
 
     <!-- JavaScript -->

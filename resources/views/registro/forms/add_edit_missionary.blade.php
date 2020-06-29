@@ -1,22 +1,10 @@
-@extends('layouts.registro.app')
-@section('title', 'Cadastrar Missionario')
-
-@section('before_end_head')
-<style>
-  ul#result_cities { position: absolute; width: 100%; max-width: 870px; cursor: pointer; overflow-y: auto; max-height: 400px; box-sizing: border-box; z-index: 1001; }
-  ul#result_cities .link-class:hover { background-color: #f1f1f1; }
-</style>
-@endsection
-
-
-@section('content')
 <div class="h-100 row align-items-center">
-    <div class="col-lg-10 col-md-10 col-sm-10 container justify-content-center">
+    <div class="col-lg-12 col-md-12 col-sm-12 container justify-content-center">
 
         <h1 class="bd-lead justify-content-center mt-3 mb-3">Cadastro de Missionários</h1>
         <p class="bd-lead">Os dados aqui informados NÃO serão divulgados. Eles servem apenas para mapeamento e para estatísticas.</p>
 
-        <form class="tf-form needs-validation mt-3 row" novalidate method="POST" action="{{ route('cadastro_de_missionario_store') }}">
+        <form class="tf-form needs-validation mt-3 row" novalidate method="POST" action="{{ route('my_account.missionary_store') }}">
 
             {{ csrf_field() }}
 
@@ -498,7 +486,7 @@
             </div>
         
             <div class="form-group col-lg-12">
-                <button type="submit" class="btn btn-primary">Cadastrar</button
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
             </div>
             
         </form>
@@ -526,4 +514,3 @@
         </script>
     </div>
 </div>
-@endsection

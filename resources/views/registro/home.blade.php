@@ -5,6 +5,8 @@
 @include('layouts.registro/includes/carousel')
 @endsection
 
+@section('no_top_space', '')
+
 @section('content')
 
 <div class="row">
@@ -20,7 +22,7 @@
                 <div class="links">
                     <a href="#" class="btn btn-outline-info btn-sm">Ver locais atendidos</a>
                     <a href="#" class="btn btn-outline-info btn-sm">Cadastrar região</a>
-                    <a href="{{ route('cadastro_de_missionario_form') }}" class="btn btn-outline-info btn-sm">Cadastrar missionário</a>
+                    <a href="{{ route('my_account.missionary_form') }}" class="btn btn-outline-info btn-sm">Cadastrar missionário</a>
                     <a href="#" class="btn btn-outline-info btn-sm">Pedir missionários</a>
                 </div>
             </div>

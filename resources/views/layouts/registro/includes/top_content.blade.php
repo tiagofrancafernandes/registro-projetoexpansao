@@ -15,7 +15,7 @@
                 <a class="nav-link" href="{{ route('error_page_404') }}">404</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('cadastro_de_missionario_form') }}">Cadastro de Missionario</a>
+                <a class="nav-link" href="{{ route('my_account.missionary_form') }}">Cadastro de Missionario</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -25,9 +25,9 @@
         <div class="dropdown form-inline my-2 my-lg-0">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @guest
-                <span> Entrar <i class="fas fa-user-shield"></i> </span>
+                    <span> Entrar <i class="fas fa-user-shield"></i> </span>
                 @else
-                <span>{{ Auth::user()->name }} <span class="caret"></span> <i class="fas fa-user-shield"></i> </span>
+                    <span>{{ Auth::user()->name }} <span class="caret"></span> <i class="fas fa-user-shield"></i> </span>
                 @endguest
     
             </button>
