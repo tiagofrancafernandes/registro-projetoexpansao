@@ -40,7 +40,7 @@
             </div>
             @else
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <a href="{{ route('home') }}#minha_conta" class="dropdown-item">{{ __('My account') }}</a>
+                <a href="{{ route('my_account.dashboard') }}" class="dropdown-item">{{ __('My account') }}</a>
                 <a href="{{ route('logout') }}" class="dropdown-item"
                     onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
