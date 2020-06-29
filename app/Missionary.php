@@ -28,5 +28,6 @@ class Missionary extends Model
         'allocated_long',
         'created_at',
         'updated_at',
+        'created_by',
     ];
 }
