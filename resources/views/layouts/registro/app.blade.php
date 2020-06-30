@@ -43,7 +43,7 @@
     @else
         <div class="force_spacing"></div>
     @endif
-    <div class="container-box mt-3 pt-3">
+    <div class="container-box m-3 p-3">
         @yield('content')
     </div>
     <div class="force_spacing"></div>
