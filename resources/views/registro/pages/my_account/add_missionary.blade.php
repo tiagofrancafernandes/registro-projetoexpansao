@@ -1,5 +1,12 @@
 @extends('registro/pages/my_account/my_account_template')
-@section('title', 'Cadastrar Missionario')
+
+@php
+$is_edit   = (\Route::current()->getName() == 'my_account.missionary_edit');
+$_title    = ($is_edit)? 'Editar Missionário' : 'Cadastrar Missionário';
+
+@endphp
+
+@section('title', $_title)
 
 @section('before_end_head')
 <style>

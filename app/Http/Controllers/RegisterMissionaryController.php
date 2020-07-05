@@ -29,12 +29,32 @@ class RegisterMissionaryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if($user = auth()->user())
         {
-            $missionaries = Missionary::where('created_by', $user->id)->get();
-         return view('registro/pages/my_account/missionaries', compact(['missionaries']));
+            $filter_by  = $request->filter_by;
+            $filter_by  = (in_array($filter_by, ['approved', 'rejected'])) ? $filter_by : 'ALL';
+
+            $query      = Missionary::where('created_by', $user->id);
+
+
+            if($filter_by != 'ALL')
+            {
+                switch ($filter_by)
+                {
+                    case 'approved':
+                        $query = $query->where('approved', true);
+                        break;
+
+                    case 'rejected':
+                        $query = $query->where('approved', false);
+                        break;
+                }
+            }
+
+            $missionaries = $query->paginate(10);
+         return view('registro/pages/my_account/missionaries', compact(['missionaries', 'filter_by']));
         }
     }
 
@@ -65,8 +85,8 @@ class RegisterMissionaryController extends Controller
                 'name'                  => $request->name,
                 'email_1'               => $request->email_1,
                 'email_2'               => $request->email_2,
-                'phone_1'               => (isset($request->phone_1['number'])) ? $request->phone_1 : null,
-                'phone_2'               => (isset($request->phone_2['number'])) ? $request->phone_2 : null,
+                'phone_1'               => (isset($request->phone_1['number'])) ? json_encode($request->phone_1) : null,
+                'phone_2'               => (isset($request->phone_2['number'])) ? json_encode($request->phone_2) : null,
                 'note'                  => $request->note,
                 'allocated_in'          => $request->allocated_in,
                 'allocated_country'     => $request->allocated_country,
@@ -76,6 +96,7 @@ class RegisterMissionaryController extends Controller
                 'allocated_lat'         => $request->allocated_lat,
                 'allocated_long'        => $request->allocated_long,
                 'created_by'            => $user->id,
+                'approved'              => false,
             ];
 
             $status = Missionary::updateOrCreate(
@@ -109,7 +130,13 @@ class RegisterMissionaryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $missionary = Missionary::find($id);
+
+        if($missionary)
+            return view('registro/pages/my_account/add_missionary', compact(['missionary']));
+        else{
+            return redirect()->route('my_account.missionaries')->with(['error' => 'Registro não encontrado!']);
+        }
     }
 
     /**
@@ -119,9 +146,41 @@ class RegisterMissionaryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if($user = auth()->user())
+        {
+            if($request->m_id)
+            {
+                $data       = [
+                    'name'                  => $request->name,
+                    'email_1'               => $request->email_1,
+                    'email_2'               => $request->email_2,
+                    'phone_1'               => (isset($request->phone_1['number'])) ? json_encode($request->phone_1) : null,
+                    'phone_2'               => (isset($request->phone_2['number'])) ? json_encode($request->phone_2) : null,
+                    'note'                  => $request->note,
+                    'allocated_in'          => $request->allocated_in,
+                    'allocated_country'     => $request->allocated_country,
+                    'allocated_state'       => $request->allocated_state,
+                    'allocated_city'        => $request->allocated_city,
+                    'allocated_district'    => $request->allocated_district,
+                    'allocated_lat'         => $request->allocated_lat,
+                    'allocated_long'        => $request->allocated_long,
+                    'created_by'            => $user->id,
+                    'approved'              => false,
+                ];
+
+                $status     = Missionary::where('id', $request->m_id)->update($data);
+
+                if($status)
+                    return redirect()->route('my_account.missionaries')->with(['success' => 'Registro atualizado com sucesso!']);
+                else
+                    return redirect()->route('my_account.missionaries')->with(['error' => 'Erro ao atualizar os dados']);
+            }else{
+                return redirect()->route('my_account.missionaries')->with(['error' => 'Por favor verifique os dados informados']);
+            }
+
+        }
     }
 
     /**
@@ -132,6 +191,14 @@ class RegisterMissionaryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $missionary = Missionary::find($id);
+        if($missionary)
+        {
+           $status  = $missionary->delete();
+           if($status)
+           return redirect()->route('my_account.missionaries')->with(['success' => 'Registro excluído com sucesso!']);
+        }else{
+            return redirect()->route('my_account.missionaries')->with(['error' => 'Registro não encontrado!']);
+        }
     }
 }

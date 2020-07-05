@@ -12,26 +12,40 @@ class SimpleUserTableSeeder extends Seeder
      */
     public function run()
     {
-        $name       = 'First User';
-        $email      = 'user@user.com';
-        $password   = 'user123';
-        $active     = true;
-
-        $user       = User::where('email', $email)->first();
-
-        $user_data  = [
-            'name'            => $name,
-            'email'           => $email,
-            'password'        => bcrypt($password),
-            'active'          => $active,
-            'activate_token'  => ''
+        $admins     = [
+            [
+                'name'       => 'First User',
+                'email'      => 'firstuser@user.com',
+                'password'   => 'user123',
+                'active'     => true,
+            ],
+            [
+                'name'       => 'Second User',
+                'email'      => 'seconduser@user.com',
+                'password'   => 'user123',
+                'active'     => true,
+            ],
         ];
 
-        if($user)
+        foreach($admins as $a)
         {
-            $user->update($user_data);
-        }else{
-            User::create($user_data);
+            $user       = User::where('email', $a['email'])->first();
+
+            $user_data  = [
+                'name'            => $a['name'],
+                'email'           => $a['email'],
+                'password'        => bcrypt($a['password']),
+                'active'          => $a['active'],
+                'activate_token'  => ''
+            ];
+    
+            if($user)
+            {
+                $user->update($user_data);
+            }else{
+                User::create($user_data);
+            }
         }
+
     }
 }

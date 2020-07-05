@@ -27,6 +27,9 @@
 // dd(\Route::current()->getName());
 @endphp
 <div class="row m-1">
+    <div class="col-md-12">
+        @include('layouts.registro/includes/flash_messages')
+    </div>
     <div class="col-md-3">
         <nav class="nav flex-column">
             <a class="nav-link text-white {{ (\Route::current()->getName() == 'my_account.dashboard') ? 'bg-dark' : 'bg-info' }}" 

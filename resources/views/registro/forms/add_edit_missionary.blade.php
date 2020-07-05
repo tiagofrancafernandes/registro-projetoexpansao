@@ -1,22 +1,29 @@
-<div class="h-100 row align-items-center">
+<div class="h-100 row align-items-center shadow">
     <div class="col-lg-12 col-md-12 col-sm-12 container justify-content-center">
 
-        <h1 class="bd-lead justify-content-center mt-3 mb-3">Cadastro de Missionários</h1>
+        <h1 class="bd-lead justify-content-center mt-3 mb-3">{{ $_title }}</h1>
         <p class="bd-lead">Os dados aqui informados NÃO serão divulgados. Eles servem apenas para mapeamento e para estatísticas.</p>
 
-        <form class="tf-form needs-validation mt-3 row" novalidate method="POST" action="{{ route('my_account.missionary_store') }}">
+        @php
+          $action_route = ($is_edit) ? route('my_account.missionary_update') : route('my_account.missionary_store');
+        @endphp
+
+        <form class="tf-form needs-validation mt-3 p-3 row" novalidate method="POST" 
+          action="{{ $action_route }}">
 
             {{ csrf_field() }}
 
-            {{-- <div class="card col-lg-12 card-body mb-3 case_is_edit">
+            @if($is_edit)
+            <div class="card col-lg-12 card-body mb-3 case_is_edit _hide">
                 <div class="row case_is_edit">
                     <!-- m_id -->
                     <div class="form-group col-lg-12 case_is_edit">
                         <label for="m_id">m_id</label>
-                        <input type="text" class="form-control case_is_edit" name="m_id" id="m_id" placeholder="m_id" value="1" readonly>
+                        <input type="text" class="form-control case_is_edit" name="m_id" id="m_id" placeholder="m_id" value="{{ $missionary->id }}" readonly>
                     </div>
                 </div>
-            </div> --}}
+            </div>
+            @endif
 
             <div class="card col-lg-12 card-body mb-3">
                 <div class="row">
@@ -24,7 +31,8 @@
                     <!-- name -->
                     <div class="form-group col-lg-6">
                         <label for="name">Nome completo <sub class="tf-asterisk-required">*</sub></label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Ex:  João Fernandes" required>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Ex:  João Fernandes" 
+                          value="{{ ($is_edit) ? $missionary->name: '' }}" required>
                         <div class="valid-feedback">
                           Ok
                         </div>
@@ -36,13 +44,15 @@
                     <!-- alter_name -->
                     <div class="form-group col-lg-6">
                         <label for="alter_name">Nome alternativo (opcional)</label>
-                        <input type="text" class="form-control" id="alter_name" name="alter_name" placeholder="Ex: Pr João Fernandes">
+                        <input type="text" class="form-control" id="alter_name" name="alter_name" placeholder="Ex: Pr João Fernandes"
+                          value="{{ ($is_edit) ? $missionary->alter_name: '' }}">
                     </div>
                 
                     <!-- email_1 -->
                     <div class="form-group col-lg-6">
                         <label for="email_1">E-mail principal <sub class="tf-asterisk-required">*</sub></label>
-                        <input type="email" class="form-control" id="email_1" name="email_1" placeholder="E-mail principal" required>
+                        <input type="email" class="form-control" id="email_1" name="email_1" placeholder="E-mail principal" 
+                        value="{{ ($is_edit) ? $missionary->email_1: '' }}" required>
                         <div class="valid-feedback">
                           Ok
                         </div>
@@ -54,7 +64,8 @@
                     <!-- email_2 -->
                     <div class="form-group col-lg-6">
                         <label for="email_2">E-mail secundário (opcional)</label>
-                        <input type="email" class="form-control" id="email_2" name="email_2" placeholder="E-mail secundário">
+                        <input type="email" class="form-control" id="email_2" name="email_2" placeholder="E-mail secundário"
+                        value="{{ ($is_edit) ? $missionary->email_2: '' }}">
                     </div>
                 </div>
             </div>
@@ -117,8 +128,8 @@
             <div class="card col-lg-12 card-body mb-3">
                 <div class="row">
                   <div class="form-group col-lg-12">
-                    <label for="note">Nota adcional (opcional)</label>
-                    <textarea class="form-control" id="note" name="note" placeholder="Nota adcional" rows="3"></textarea>
+                    <label for="note">Nota adicional (opcional)</label>
+                    <textarea class="form-control" id="note" name="note" placeholder="Nota adicional" rows="3">{{ ($is_edit) ? $missionary->note: '' }}</textarea>
                   </div>
                 </div>
             </div>
@@ -134,7 +145,8 @@
                         <!-- allocated_in_string -->
                         <div class="form-group col-lg-12">
                           <label for="allocated_in_string">Endereço por extenso <sub class="tf-asterisk-required">*</sub></label>
-                          <input type="text" class="form-control" id="allocated_in_string" name="allocated_in" placeholder="Alocado em" value="Temp" required>
+                          <input type="text" class="form-control" id="allocated_in_string" name="allocated_in" placeholder="Alocado em" 
+                          value="{{ ($is_edit) ? $missionary->allocated_in: '' }}" required>
                           <ul class="list-group" id="result_cities"></ul>
 
                           <div class="valid-feedback">
@@ -147,7 +159,8 @@
 
                         <div class="col-md-3 mb-3">
                           <label for="allocated_city">Cidade/Região <sub class="tf-asterisk-required">*</sub></label>
-                          <input type="text" class="form-control" id="allocated_city" name="allocated_city" placeholder="Cidade" required="">
+                          <input type="text" class="form-control" id="allocated_city" name="allocated_city" placeholder="Cidade" 
+                            value="{{ ($is_edit) ? $missionary->allocated_city: '' }}" required="">
                           <div class="invalid-tooltip">
                             Por favor informe uma cidade ou região.
                           </div>
@@ -453,17 +466,20 @@
 
                         <div class="col-md-3 mb-3">
                           <label for="allocated_district">Bairro</label>
-                          <input type="text" class="form-control" id="allocated_district" name="allocated_district" placeholder="Bairro">
+                          <input type="text" class="form-control" id="allocated_district" name="allocated_district" placeholder="Bairro"
+                          value="{{ ($is_edit) ? $missionary->allocated_district: '' }}">
                         </div>
 
                         <div class="col-md-6 mb-3">
                           <label for="latitude">Latitude</label>
-                          <input type="text" class="form-control" id="latitude" name="allocated_lat" placeholder="Latitude">
+                          <input type="text" class="form-control" id="latitude" name="allocated_lat" placeholder="Latitude"
+                          value="{{ ($is_edit) ? $missionary->allocated_lat: '' }}">
                         </div>
 
                         <div class="col-md-6 mb-3">
                           <label for="longitude">Longitude</label>
-                          <input type="text" class="form-control" id="longitude" name="allocated_long" placeholder="Longitude">
+                          <input type="text" class="form-control" id="longitude" name="allocated_long" placeholder="Longitude"
+                          value="{{ ($is_edit) ? $missionary->allocated_long: '' }}">
                         </div>
                       </div>
 
@@ -486,7 +502,7 @@
             </div>
         
             <div class="form-group col-lg-12">
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <button type="submit" class="btn btn-primary">{{ ($is_edit)? 'Atualizar' : 'Cadastrar' }}</button>
             </div>
             
         </form>

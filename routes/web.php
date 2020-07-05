@@ -39,14 +39,14 @@ Route::get('/teste', function () {
 
 
 Route::prefix('minha_conta')->name('my_account.')->middleware('auth')->group(function () {
-    Route::get('/',                                     'RegisterMissionaryController@dashboard')->name('dashboard');
-    Route::get('/missionarios',                         'RegisterMissionaryController@index')->name('missionaries');
-    Route::get('/missionario/{m_id}',                   'RegisterMissionaryController@show')->name('missionary_show');
-    Route::get('/cadastro_de_missionario',              'RegisterMissionaryController@create')->name('missionary_form');
-    Route::get('/cadastro_de_missionario/edit/{m_id}',  'RegisterMissionaryController@edit')->name('missionary_edit');
-    Route::post('/cadastro_de_missionario/store',       'RegisterMissionaryController@store')->name('missionary_store');
-    Route::post('/cadastro_de_missionario/update',      'RegisterMissionaryController@update')->name('missionary_update');
-    Route::post('/cadastro_de_missionario/delete',      'RegisterMissionaryController@destroy')->name('missionary_delete');
+    Route::get('/',                                         'RegisterMissionaryController@dashboard')->name('dashboard');
+    Route::get('/missionarios',                             'RegisterMissionaryController@index')->name('missionaries');
+    Route::get('/missionario/{m_id}',                       'RegisterMissionaryController@show')->name('missionary_show');
+    Route::get('/cadastro_de_missionario',                  'RegisterMissionaryController@create')->name('missionary_form');
+    Route::get('/cadastro_de_missionario/edit/{m_id}',      'RegisterMissionaryController@edit')->name('missionary_edit');
+    Route::post('/cadastro_de_missionario/store',           'RegisterMissionaryController@store')->name('missionary_store');
+    Route::post('/cadastro_de_missionario/update',          'RegisterMissionaryController@update')->name('missionary_update');
+    Route::get('/missionario/excluir/{m_id}',               'RegisterMissionaryController@destroy')->name('missionary_delete');
 });
 
 
