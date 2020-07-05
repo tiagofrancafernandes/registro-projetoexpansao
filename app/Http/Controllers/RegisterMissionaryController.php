@@ -65,7 +65,7 @@ class RegisterMissionaryController extends Controller
      */
     public function create()
     {
-        return view('registro/pages/my_account/add_missionary');
+        return view('registro/pages/my_account/add_edit_missionary');
     }
 
     /**
@@ -133,7 +133,7 @@ class RegisterMissionaryController extends Controller
         $missionary = Missionary::find($id);
 
         if($missionary)
-            return view('registro/pages/my_account/add_missionary', compact(['missionary']));
+            return view('registro/pages/my_account/add_edit_missionary', compact(['missionary']));
         else{
             return redirect()->route('my_account.missionaries')->with(['error' => 'Registro não encontrado!']);
         }
