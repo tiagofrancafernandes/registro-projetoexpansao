@@ -14,7 +14,7 @@ class AddCollumnApprovedInMissionariesTable extends Migration
     public function up()
     {
         Schema::table('missionaries', function (Blueprint $table) {
-            $table->boolean('approved')->nullable(false)->default(false);
+            $table->boolean('approved')->nullable()->default(null);
             $table->datetime('approved_at')->nullable(true)->default(null);
             $table->integer('approved_by')->nullable(true)->default(null);
         });

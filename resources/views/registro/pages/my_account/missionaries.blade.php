@@ -10,6 +10,10 @@
                 href="{{ route('my_account.missionaries', ['filter_by' => 'ALL']) }}"> Todos
             </a>
 
+            <a class="btn btn-outline-secondary {{ ($filter_by == 'pending' ) ? 'active' : '' }}" 
+                href="{{ route('my_account.missionaries', ['filter_by' => 'pending']) }}"> Pendentes
+            </a>
+
             <a class="btn btn-outline-success {{ ($filter_by == 'approved' ) ? 'active' : '' }}" 
                 href="{{ route('my_account.missionaries', ['filter_by' => 'approved']) }}"> Aprovados
             </a>
@@ -30,6 +34,7 @@
                 <th scope="col">Nome</th>
                 <th scope="col">E-mail Principal</th>
                 <th scope="col">Alocado em</th>
+                <th scope="col">Status</th>
                 <th scope="col">Ações</th>
             </tr>
         </thead>
@@ -42,6 +47,24 @@
                 <td>{{ $m->name }}</td>
                 <td>{{ $m->email_1 }}</td>
                 <td>{{ $m->allocated_in }}</td>
+                <td>
+                    @switch($m->status)
+                        @case('pending')
+                        <span class="badge badge-secondary">Pendente</span>
+                            @break
+
+                        @case('approved')
+                        <span class="badge badge-success">Aprovado</span>
+                            @break
+
+                        @case('rejected')
+                        <span class="badge badge-danger">Rejeitado</span>
+                            @break
+
+                        @default
+                            
+                    @endswitch
+                </td>
                 <td>
                     <button type="button" class="btn btn-sm btn-primary open_modal view missionary_detail_modal" title="Visualizar" 
                         data-toggle="modal" data-target="#missionary_detail"

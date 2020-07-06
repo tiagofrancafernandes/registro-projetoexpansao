@@ -34,9 +34,10 @@ class RegisterMissionaryController extends Controller
         if($user = auth()->user())
         {
             $filter_by  = $request->filter_by;
-            $filter_by  = (in_array($filter_by, ['approved', 'rejected'])) ? $filter_by : 'ALL';
+            $filter_by  = (in_array($filter_by, ['approved', 'rejected', 'pending'])) ? $filter_by : 'ALL';
 
             $query      = Missionary::where('created_by', $user->id);
+
 
 
             if($filter_by != 'ALL')
@@ -44,7 +45,11 @@ class RegisterMissionaryController extends Controller
                 switch ($filter_by)
                 {
                     case 'approved':
-                        $query = $query->where('approved', true);
+                        $query = $query->where('approved', true)->whereNotNull('approved_at')->whereNotNull('approved_by');
+                        break;
+
+                    case 'pending':
+                        $query = $query->whereNull('approved');
                         break;
 
                     case 'rejected':
@@ -65,7 +70,7 @@ class RegisterMissionaryController extends Controller
      */
     public function create()
     {
-        return view('registro/pages/my_account/add_edit_missionary');
+        return view('registro/pages/my_account/add_edit_missionary_page');
     }
 
     /**
@@ -133,7 +138,7 @@ class RegisterMissionaryController extends Controller
         $missionary = Missionary::find($id);
 
         if($missionary)
-            return view('registro/pages/my_account/add_edit_missionary', compact(['missionary']));
+            return view('registro/pages/my_account/add_edit_missionary_page', compact(['missionary']));
         else{
             return redirect()->route('my_account.missionaries')->with(['error' => 'Registro não encontrado!']);
         }

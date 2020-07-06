@@ -6,6 +6,7 @@
 
         @php
           $action_route = ($is_edit) ? route('my_account.missionary_update') : route('my_account.missionary_store');
+         // dd($missionary->phone_1);
         @endphp
 
         <form class="tf-form needs-validation mt-3 p-3 row" novalidate method="POST" 
@@ -75,7 +76,8 @@
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="phone_1">Telefone principal <sub class="tf-asterisk-required">*</sub></label>
-                        <input type="text" class="form-control" id="phone_1_number" name="phone_1[number]" placeholder="Telefone principal" required>
+                        <input type="text" class="form-control" id="phone_1_number" name="phone_1[number]" placeholder="Telefone principal" 
+                          value="{{ ($is_edit && isset($missionary->phone_1['number']))? $missionary->phone_1['number'] : '' }}" required>
                         <div class="valid-feedback">
                           Ok
                         </div>
@@ -87,13 +89,15 @@
                     <div class="col-lg-6 row">
                         <div class="col-lg-3 form-check form-check-inline mt-3 p-1 pl-3">
                           <input class="form-check-input tf-cursor-pointer tf-text-f-green" 
-                           type="checkbox" id="phone_1_wa" name="phone_1[socials][wa]" value="1">
+                           type="checkbox" id="phone_1_wa" name="phone_1[socials][wa]" value="1"
+                           {{ (isset($missionary->phone_1['socials']['wa']) && $missionary->phone_1['socials']['wa'] == 1)? 'checked' :'' }} >
                           <label class="form-check-label tf-font-bold tf-cursor-pointer tf-text-f-green" for="phone_1_wa">WhatsApp</label>
                         </div>
         
                         <div class="col-lg-3 form-check form-check-inline mt-3 p-1 pl-3">
                           <input class="form-check-input tf-cursor-pointer tf-text-f-blue" 
-                           type="checkbox" id="phone_1_telegram" name="phone_1[socials][telegram]" value="1">
+                           type="checkbox" id="phone_1_telegram" name="phone_1[socials][telegram]" value="1"
+                           {{ (isset($missionary->phone_1['socials']['telegram']) && $missionary->phone_1['socials']['telegram'] == 1)? 'checked' :'' }} >
                           <label class="form-check-label tf-font-bold tf-cursor-pointer tf-text-f-blue" for="phone_1_telegram">Telegram</label>
                         </div>
                     </div>                    
@@ -105,19 +109,22 @@
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="phone_2">Telefone secundário (opcional)</label>
-                        <input type="text" class="form-control" id="phone_2_number" name="phone_2[number]" placeholder="Telefone secundário">
+                        <input type="text" class="form-control" id="phone_2_number" name="phone_2[number]" placeholder="Telefone secundário"
+                        value="{{ ($is_edit && isset($missionary->phone_2['number']))? $missionary->phone_2['number'] :'' }}" >
                     </div>
                     
                     <div class="col-lg-6 row">
                         <div class="col-lg-3 form-check form-check-inline mt-3 p-1 pl-3">
                           <input class="form-check-input tf-cursor-pointer tf-text-f-green" 
-                           type="checkbox" id="phone_2_wa" name="phone_2[socials][wa]" value="1">
+                           type="checkbox" id="phone_2_wa" name="phone_2[socials][wa]" value="1"
+                           {{ (isset($missionary->phone_2['socials']['wa']) && $missionary->phone_2['socials']['wa'] == 1)? 'checked' :'' }} >
                           <label class="form-check-label tf-font-bold tf-cursor-pointer tf-text-f-green" for="phone_2_wa">WhatsApp</label>
                         </div>
         
                         <div class="col-lg-3 form-check form-check-inline mt-3 p-1 pl-3">
                           <input class="form-check-input tf-cursor-pointer tf-text-f-blue" 
-                           type="checkbox" id="phone_2_telegram" name="phone_2[socials][telegram]" value="1">
+                           type="checkbox" id="phone_2_telegram" name="phone_2[socials][telegram]" value="1"
+                           {{ (isset($missionary->phone_2['socials']['telegram']) && $missionary->phone_2['socials']['telegram'] == 1)? 'checked' :'' }} >
                           <label class="form-check-label tf-font-bold tf-cursor-pointer tf-text-f-blue" for="phone_2_telegram">Telegram</label>
                         </div>
                     </div>                    
@@ -170,7 +177,7 @@
                           <label for="allocated_country">País <sub class="tf-asterisk-required">*</sub></label>
                           <select class="custom-select" id="allocated_country" name="allocated_country" required="">
                             <option selected="" value="">País...</option>
-                            <option value="Brasil">Brasil</option>
+                            <option value="Brasil" {{ ($is_edit && $missionary->allocated_country == 'Brasil')? 'selected' : '' }}>Brasil</option>
                             {{--  <option value="Afeganistão">Afeganistão</option>
                             <option value="África do Sul">África do Sul</option>
                             <option value="Albânia">Albânia</option>
@@ -430,34 +437,34 @@
                           <label for="allocated_state">Estado <sub class="tf-asterisk-required">*</sub></label>
                           <select class="custom-select" id="allocated_state" name="allocated_state" required="">
                             <option selected="" value="">Estado...</option>
-                            <option value="BR-AC">Acre</option>
-                            <option value="BR-AL">Alagoas</option>
-                            <option value="BR-AP">Amapá</option>
-                            <option value="BR-AM">Amazonas</option>
-                            <option value="BR-BA">Bahia</option>
-                            <option value="BR-CE">Ceará</option>
-                            <option value="BR-DF">Distrito Federal</option>
-                            <option value="BR-ES">Espírito Santo</option>
-                            <option value="BR-GO">Goiás</option>
-                            <option value="BR-MA">Maranhão</option>
-                            <option value="BR-MT">Mato Grosso</option>
-                            <option value="BR-MS">Mato Grosso do Sul</option>
-                            <option value="BR-MG">Minas Gerais</option>
-                            <option value="BR-PA">Pará</option>
-                            <option value="BR-PB">Paraíba</option>
-                            <option value="BR-PR">Paraná</option>
-                            <option value="BR-PE">Pernambuco</option>
-                            <option value="BR-PI">Piauí</option>
-                            <option value="BR-RJ">Rio de Janeiro</option>
-                            <option value="BR-RN">Rio Grande do Norte</option>
-                            <option value="BR-RS">Rio Grande do Sul</option>
-                            <option value="BR-RO">Rondônia</option>
-                            <option value="BR-RR">Roraima</option>
-                            <option value="BR-SC">Santa Catarina</option>
-                            <option value="BR-SP">São Paulo</option>
-                            <option value="BR-SE">Sergipe</option>
-                            <option value="BR-TO">Tocantins</option>
-                            <option value="BR-EX">Estrangeiro</option>
+                            <option value="BR-AC" {{ ($is_edit && $missionary->allocated_state == 'BR-AC')? 'selected' : '' }}>Acre</option>
+                            <option value="BR-AL" {{ ($is_edit && $missionary->allocated_state == 'BR-AL')? 'selected' : '' }}>Alagoas</option>
+                            <option value="BR-AP" {{ ($is_edit && $missionary->allocated_state == 'BR-AP')? 'selected' : '' }}>Amapá</option>
+                            <option value="BR-AM" {{ ($is_edit && $missionary->allocated_state == 'BR-AM')? 'selected' : '' }}>Amazonas</option>
+                            <option value="BR-BA" {{ ($is_edit && $missionary->allocated_state == 'BR-BA')? 'selected' : '' }}>Bahia</option>
+                            <option value="BR-CE" {{ ($is_edit && $missionary->allocated_state == 'BR-CE')? 'selected' : '' }}>Ceará</option>
+                            <option value="BR-DF" {{ ($is_edit && $missionary->allocated_state == 'BR-DF')? 'selected' : '' }}>Distrito Federal</option>
+                            <option value="BR-ES" {{ ($is_edit && $missionary->allocated_state == 'BR-ES')? 'selected' : '' }}>Espírito Santo</option>
+                            <option value="BR-GO" {{ ($is_edit && $missionary->allocated_state == 'BR-GO')? 'selected' : '' }}>Goiás</option>
+                            <option value="BR-MA" {{ ($is_edit && $missionary->allocated_state == 'BR-MA')? 'selected' : '' }}>Maranhão</option>
+                            <option value="BR-MT" {{ ($is_edit && $missionary->allocated_state == 'BR-MT')? 'selected' : '' }}>Mato Grosso</option>
+                            <option value="BR-MS" {{ ($is_edit && $missionary->allocated_state == 'BR-MS')? 'selected' : '' }}>Mato Grosso do Sul</option>
+                            <option value="BR-MG" {{ ($is_edit && $missionary->allocated_state == 'BR-MG')? 'selected' : '' }}>Minas Gerais</option>
+                            <option value="BR-PA" {{ ($is_edit && $missionary->allocated_state == 'BR-PA')? 'selected' : '' }}>Pará</option>
+                            <option value="BR-PB" {{ ($is_edit && $missionary->allocated_state == 'BR-PB')? 'selected' : '' }}>Paraíba</option>
+                            <option value="BR-PR" {{ ($is_edit && $missionary->allocated_state == 'BR-PR')? 'selected' : '' }}>Paraná</option>
+                            <option value="BR-PE" {{ ($is_edit && $missionary->allocated_state == 'BR-PE')? 'selected' : '' }}>Pernambuco</option>
+                            <option value="BR-PI" {{ ($is_edit && $missionary->allocated_state == 'BR-PI')? 'selected' : '' }}>Piauí</option>
+                            <option value="BR-RJ" {{ ($is_edit && $missionary->allocated_state == 'BR-RJ')? 'selected' : '' }}>Rio de Janeiro</option>
+                            <option value="BR-RN" {{ ($is_edit && $missionary->allocated_state == 'BR-RN')? 'selected' : '' }}>Rio Grande do Norte</option>
+                            <option value="BR-RS" {{ ($is_edit && $missionary->allocated_state == 'BR-RS')? 'selected' : '' }}>Rio Grande do Sul</option>
+                            <option value="BR-RO" {{ ($is_edit && $missionary->allocated_state == 'BR-RO')? 'selected' : '' }}>Rondônia</option>
+                            <option value="BR-RR" {{ ($is_edit && $missionary->allocated_state == 'BR-RR')? 'selected' : '' }}>Roraima</option>
+                            <option value="BR-SC" {{ ($is_edit && $missionary->allocated_state == 'BR-SC')? 'selected' : '' }}>Santa Catarina</option>
+                            <option value="BR-SP" {{ ($is_edit && $missionary->allocated_state == 'BR-SP')? 'selected' : '' }}>São Paulo</option>
+                            <option value="BR-SE" {{ ($is_edit && $missionary->allocated_state == 'BR-SE')? 'selected' : '' }}>Sergipe</option>
+                            <option value="BR-TO" {{ ($is_edit && $missionary->allocated_state == 'BR-TO')? 'selected' : '' }}>Tocantins</option>
+                            <option value="BR-EX" {{ ($is_edit && $missionary->allocated_state == 'BR-EX')? 'selected' : '' }}>Estrangeiro</option>
                           </select>
                           <div class="invalid-tooltip">
                             Por favor selecione um estado.

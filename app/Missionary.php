@@ -29,5 +29,27 @@ class Missionary extends Model
         'created_at',
         'updated_at',
         'created_by',
+        'approved',
+        'approved_by',
+        'approved_at',
+        'alter_name',
     ];
+
+    protected $appends = ['status'];
+
+    //define accessor
+    public function getStatusAttribute()
+    {
+        if($this->approved && !is_null($this->approved_at) && !is_null($this->approved_by))
+        {
+            return $approved_status = 'approved';
+        }else if(!is_null($this->approved) && $this->approved == false)
+        {
+            return $approved_status = 'rejected';
+        }else if(is_null($this->approved) || is_null($this->approved_at) || is_null($this->approved_by))
+        {
+            return $approved_status = 'pending';
+        }else
+            return $approved_status = 'pending';
+    }
 }
