@@ -50,15 +50,15 @@
                 <td>
                     @switch($m->status)
                         @case('pending')
-                        <span class="badge badge-secondary">Pendente</span>
+                        <span class="badge badge-secondary" title="Pendente">Pendente</span>
                             @break
 
                         @case('approved')
-                        <span class="badge badge-success">Aprovado</span>
+                        <span class="badge badge-success" title="Aprovado">Aprovado</span>
                             @break
 
                         @case('rejected')
-                        <span class="badge badge-danger">Rejeitado</span>
+                        <span class="badge badge-danger" title="Rejeitado">Rejeitado</span>
                             @break
 
                         @default
